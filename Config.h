@@ -26,7 +26,6 @@ namespace config
 
 		void AddField(std::shared_ptr<FieldEntry> field);
 
-		inline std::string FixFieldName(const std::string& fieldName)
 		{
 			if (fieldName.substr(1, 1) == "_")
 				return fieldName.substr(2);
@@ -39,7 +38,6 @@ namespace config
 	{
 		auto newField = Field<T>(friendName, name, section, T(args...), multiProfile);
 		internal::s_Fields<Field<T>>.push_back(newField);
-		internal::AddField(newField.entry());
 		return newField;
 	}
 
@@ -49,7 +47,6 @@ namespace config
 		return internal::s_Fields<Field<T>>;
 	}
 
-	void Initialize(const std::string& filePath);
 	void SetupUpdate(TEvent<>*);
 
 	void Refresh();
